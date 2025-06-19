@@ -1,0 +1,169 @@
+# Copyright 2025 The MathWorks, Inc.
+#
+# This is a configuration file for use with LLVM's Clang-Tidy automatic source code linter
+#     https://clang.llvm.org/extra/clang-tidy
+#
+# Usage:
+# See sb-clang-tidy for all switches
+#
+# Using clang-tidy directly: 
+# clang-tidy <file_1.cpp,file_2.cpp,..file_n.cpp> --config-file=/path/to/this/file 
+# clang-tidy -list-checks
+# clang-tidy --dump-config
+# clang-tidy --explain-config 
+# clang-tidy --verify-config
+
+##########################################
+### Checks list
+##########################################
+Checks: '
+bugprone-argument-comment,
+bugprone-assignment-in-if-condition,
+bugprone-chained-comparison,
+bugprone-copy-constructor-init,
+bugprone-empty-catch,
+bugprone-exception-escape,
+bugprone-forward-declaration-namespace,
+bugprone-implicit-widening-of-multiplication-result,
+bugprone-inc-dec-in-conditions,
+bugprone-incorrect-roundings,
+bugprone-infinite-loop,
+bugprone-integer-division,
+bugprone-misplaced-widening-cast,
+bugprone-narrowing-conversions,
+bugprone-non-zero-enum-to-bool-conversion,
+bugprone-nondeterministic-pointer-iteration-order,
+cppcoreguidelines-init-variables,
+readability-delete-null-pointer,
+readability-duplicate-include,
+readability-else-after-return,
+readability-enum-initial-value,
+readability-function-size,
+readability-identifier-naming,
+readability-identifier-length,
+readability-implicit-bool-conversion,
+readability-inconsistent-declaration-parameter-name,
+readability-isolate-declaration,
+readability-inconsistent-declaration-parameter-name,
+readability-named-parameter,
+readability-non-const-parameter,
+readability-redundant-casting,
+readability-redundant-control-flow,
+readability-redundant-declaration,
+readability-redundant-preprocessor,
+readability-reference-to-constructed-temporary,
+readability-simplify-boolean-expr,
+readability-simplify-subscript-expr,
+modernize-use-nullptr,
+modernize-use-override,
+misc-unused-parameters,
+clang-analyzer-deadcode.DeadStores
+'
+WarningsAsErrors: true
+HeaderFilterRegex: ''
+
+# Pick format style from clang-format file in the parent directory
+FormatStyle: file
+
+###########################################
+### All configurable check options
+###########################################
+CheckOptions:
+  - key: bugprone-argument-comment.CommentBoolLiterals
+    value: '1'
+  - key: bugprone-argument-comment.CommentNullPtrs
+    value: '1'
+  - key: readability-function-size.LineThreshold
+    value: '30'
+  - key: readability-function-size.StatementThreshold
+    value: '20'
+  - key: readability-function-size.BranchThreshold
+    value: '8'
+  - key: readability-function-size.ParameterThreshold
+    value: '3'
+  - key: readability-function-size.NestingThreshold
+    value: '5'
+  - key: readability-function-size.VariableThreshold
+    value: '7'
+  - key: readability-identifier-length.MinimumLoopCounterNameLength
+    value: '1'
+  - key: readability-inconsistent-declaration-parameter-name.IgnoreMacros
+    value: '1'
+  - key: readability-identifier-naming.AbstractClassCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassMemberPrefix
+    value: 'f'
+  - key: readability-identifier-naming.ConstantCase
+    value: 'UPPER_CASE'
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: 'UPPER_CASE'
+  - key: readability-identifier-naming.EnumCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ConstantParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ConstantParameterPrefix
+    value: 'a'
+  - key: readability-identifier-naming.ConstantPointerParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ConstantPointerParameterPrefix
+    value: 'a'
+  - key: readability-identifier-naming.FunctionCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalConstantCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalConstantPointerCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalPointerCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalVariableCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: 'UPPER_CASE'
+  - key: readability-identifier-naming.MemberCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.MethodCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.NamespaceCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ParameterPrefix
+    value: 'a'
+  - key: readability-identifier-naming.PointerParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PointerParameterPrefix
+    value: 'a'
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: 'f'
+  - key: readability-identifier-naming.PrivateMethodCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.ProtectedMemberCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.ProtectedMethodCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.PublicMemberCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.PublicMethodCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.StructCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypeAliasCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypedefCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.UnionCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.VariableCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.VirtualMethodCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.TypeAliasCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypeAliasCase
+    value: 'CamelCase'
