@@ -12,7 +12,7 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
 set(CMAKE_CXX_FLAGS -Wall)
 set(CMAKE_BUILD_TYPE Release) 
 
-# include directory
+# include directories
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # build directory
