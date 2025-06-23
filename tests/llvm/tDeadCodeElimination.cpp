@@ -20,31 +20,23 @@ using namespace llvm;
 
 static cl::opt<std::string>
     inputFileName(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
-std::unique_ptr<Module> originalModule;
-std::unique_ptr<LLVMContext> globalCtx;
+std::unique_ptr<LLVMContext> ctx;
+std::unique_ptr<Module> module;
 
-static void llvmDeadCodeElimination(benchmark::State &aState) {
-  // Create a legacy pass manager
+static void llvmDeadCodeElimination(benchmark::State& aState) {
   legacy::PassManager passManager;
-
-  // Add the dead code elimination pass
   passManager.add(createDeadCodeEliminationPass());
-  passManager.add(createPromoteMemoryToRegisterPass());
-  passManager.add(createLICMPass());
-
-  // Run the pass manager on cloned modules to avoid modifying the original
   for (auto _ : aState) {
-    auto moduleClone = CloneModule(*originalModule);
-    passManager.run(*moduleClone);
+    passManager.run(*module);
   }
 }
 
 // Register the benchmark
 BENCHMARK(llvmDeadCodeElimination)->Complexity()->Unit(benchmark::kMillisecond);
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   // Initialize passes
-  PassRegistry &passRegistry = *PassRegistry::getPassRegistry();
+  PassRegistry& passRegistry = *PassRegistry::getPassRegistry();
   initializeCore(passRegistry);
   initializeScalarOpts(passRegistry);
   initializeAnalysis(passRegistry);
@@ -53,11 +45,11 @@ int main(int argc, char **argv) {
   cl::ParseCommandLineOptions(argc, argv, "LLVM System Compiler\n");
 
   // Create context and parse the input bitcode file
-  globalCtx = std::make_unique<LLVMContext>();
+  ctx = std::make_unique<LLVMContext>();
   SMDiagnostic diag;
 
-  originalModule = parseIRFile(inputFileName, diag, *globalCtx);
-  if (!originalModule) {
+  module = parseIRFile(inputFileName, diag, *ctx);
+  if (!module) {
     diag.print(argv[0], errs());
     return 1;
   }
@@ -65,10 +57,6 @@ int main(int argc, char **argv) {
   benchmark::Initialize(&argc, argv);
   benchmark::RunSpecifiedBenchmarks();
   benchmark::Shutdown();
-
-  // Explicitly clean up in correct order
-  originalModule.reset();
-  globalCtx.reset();
 
   return 0;
 }
