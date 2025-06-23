@@ -18,21 +18,54 @@
 
 using namespace llvm;
 
+enum Pass { DCE, LICM, SROA, GVN, INST_COMBINE, MEM2REG };
+
 static cl::opt<std::string>
     inputFileName(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
 std::unique_ptr<LLVMContext> ctx;
 std::unique_ptr<Module> module;
 
-static void llvmDeadCodeElimination(benchmark::State& aState) {
+static void llvmOptBenchmark(benchmark::State& aState, const ::Pass& aPass) {
   legacy::PassManager passManager;
-  passManager.add(createDeadCodeEliminationPass());
+  switch (aPass) {
+    case ::Pass::DCE:
+      passManager.add(createDeadCodeEliminationPass());
+      break;
+    case ::Pass::LICM:
+      passManager.add(createLICMPass());
+      break;
+    case ::Pass::SROA:
+      passManager.add(createSROAPass());
+      break;
+    case ::Pass::GVN:
+      passManager.add(createGVNPass());
+      break;
+    case ::Pass::INST_COMBINE:
+      passManager.add(createInstructionCombiningPass());
+      break;
+    case ::Pass::MEM2REG:
+      passManager.add(createPromoteMemoryToRegisterPass());
+      break;
+  }
+
   for (auto _ : aState) {
     passManager.run(*module);
   }
 }
 
 // Register the benchmark
-BENCHMARK(llvmDeadCodeElimination)->Complexity()->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, DeadCodeElimination, ::Pass::DCE)
+    ->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, LICM, ::Pass::LICM)
+    ->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, SROA, ::Pass::SROA)
+    ->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, GVN, ::Pass::GVN)
+    ->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, InstCombine, ::Pass::INST_COMBINE)
+    ->Unit(benchmark::kMillisecond);
+BENCHMARK_CAPTURE(llvmOptBenchmark, Mem2Reg, ::Pass::MEM2REG)
+    ->Unit(benchmark::kMillisecond);
 
 int main(int argc, char** argv) {
   // Initialize passes

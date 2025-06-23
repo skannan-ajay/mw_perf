@@ -24,12 +24,12 @@ link_directories(/opt/homebrew/opt/llvm/lib/c++)
 #link_directories(/opt/homebrew/opt/llvm/lib/unwind)
 
 # add the executable
-add_executable(tDeadCodeElimination tDeadCodeElimination.cpp)
+add_executable(tPasses tPasses.cpp)
 add_executable(tPassPipeline tPassPipeline.cpp)
 
 llvm_map_components_to_libnames(llvm_libs support core irreader passes analysis transformutils scalaropts)
 
-target_link_libraries(tDeadCodeElimination
+target_link_libraries(tPasses
   GTest::gtest_main
   benchmark::benchmark
   ${llvm_libs}
