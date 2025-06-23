@@ -39,13 +39,13 @@ static void registerAnalysesOnPassBuilder(PassBuilder& aPassBuilder,
 static void
 llvmPassPipeline(benchmark::State& aState,
                  OptimizationLevel aOptLevel = OptimizationLevel::O2) {
-  // Initialize Pass Builder
+  // Initialize Pass Builder with the analysis managers.
   PassBuilder passBuilder;
   AnalysisManagers analysesManagers;
   registerAnalysesOnPassBuilder(passBuilder, analysesManagers);
 
   for (auto _ : aState) {
-    // Initialize Module Pass Manager
+    // Initialize module analysis manager and run the pass pipeline.
     ModulePassManager mpm =
         passBuilder.buildPerModuleDefaultPipeline(aOptLevel);
     mpm.run(*module, analysesManagers.fModuleAnalysisManager);
@@ -67,7 +67,7 @@ BENCHMARK_CAPTURE(llvmPassPipeline, OptLevelO3, OptimizationLevel::O3)
     ->Unit(benchmark::kMillisecond);
 
 int main(int argc, char** argv) {
-  // Create context and parse the input bitcode file
+  // Create context and parse the input bitcode file.
   cl::ParseCommandLineOptions(argc, argv, "LLVM System Compiler\n");
   ctx = std::make_unique<LLVMContext>();
   SMDiagnostic diag;
