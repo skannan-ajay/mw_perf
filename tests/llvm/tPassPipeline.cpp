@@ -54,16 +54,12 @@ llvmPassPipeline(benchmark::State& aState,
 
 // Register the benchmarks for each optimization level.
 BENCHMARK_CAPTURE(llvmPassPipeline, OptLevelO0, OptimizationLevel::O0)
-    ->Complexity()
     ->Unit(benchmark::kMillisecond);
 BENCHMARK_CAPTURE(llvmPassPipeline, OptLevelO1, OptimizationLevel::O1)
-    ->Complexity()
     ->Unit(benchmark::kMillisecond);
 BENCHMARK_CAPTURE(llvmPassPipeline, OptLevelO2, OptimizationLevel::O2)
-    ->Complexity()
     ->Unit(benchmark::kMillisecond);
 BENCHMARK_CAPTURE(llvmPassPipeline, OptLevelO3, OptimizationLevel::O3)
-    ->Complexity()
     ->Unit(benchmark::kMillisecond);
 
 int main(int argc, char** argv) {
