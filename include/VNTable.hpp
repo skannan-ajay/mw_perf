@@ -3,6 +3,7 @@
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_multiset_of.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
+#include <boost/range/iterator_range.hpp>
 #include <cstdint>
 #include <optional>
 

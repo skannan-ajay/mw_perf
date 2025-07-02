@@ -1,8 +1,8 @@
 
 #include <benchmark/benchmark.h>
 #include <cstdint>
-#include <map>
 #include <random>
+#include <unordered_map>
 
 // Define the number of operations to perform in each benchmark
 // This is used to control the size of the test data and the number of
@@ -10,7 +10,7 @@
 // on the performance characteristics of the system being tested.
 #define OP_COUNT 1e6
 
-using TestTable = std::multimap<uint64_t, int>;
+using TestTable = std::unordered_multimap<uint64_t, int>;
 std::default_random_engine engine;
 
 class TableFixture : public benchmark::Fixture {
@@ -40,11 +40,10 @@ BENCHMARK_DEFINE_F(TableFixture, congruence)(benchmark::State& aState) {
   TableFixture::Setup(aState);
   auto testTable = TableFixture::getTestTable();
 
-  // Test as many lookups specified by the range
   for (auto _ : aState) {
     for (int i = 0; i != OP_COUNT; ++i) {
       auto result = testTable->equal_range(i % 200);
-      benchmark::DoNotOptimize(result);
+      ::benchmark::DoNotOptimize(result);
     }
   }
 
@@ -54,7 +53,7 @@ BENCHMARK_DEFINE_F(TableFixture, congruence)(benchmark::State& aState) {
 
 BENCHMARK_REGISTER_F(TableFixture, congruence)
     ->RangeMultiplier(10)
-    ->Range(1e3, 1e6)
+    ->Range(1e3, 1e5)
     ->Unit(benchmark::kMillisecond)
     ->Complexity();
 

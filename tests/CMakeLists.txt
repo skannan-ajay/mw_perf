@@ -22,13 +22,14 @@ add_executable(tLogarithmicComplexityExample tLogarithmicComplexityExample.cpp)
 add_executable(tVNTable tVNTable.cpp)
 add_executable(tStdMap tStdMap.cpp)
 add_executable(tStdMultiMap tStdMultiMap.cpp)
+add_executable(tVNTableCongruence tVNTableCongruence.cpp)
 
 # Add libraries to link against
 target_link_libraries(hello_test GTest::gtest_main ${Boost_LIBRARIES})
-target_link_libraries(hello_bench GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tVNTableCongruence GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES} TBB::tbb)
 target_link_libraries(tLinearComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
 target_link_libraries(tLogarithmicComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
-target_link_libraries(tVNTable GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tVNTable GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES} TBB::tbb)
 target_link_libraries(tStdMap GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
 target_link_libraries(tStdMultiMap GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
 

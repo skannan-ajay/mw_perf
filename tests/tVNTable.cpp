@@ -53,22 +53,6 @@ BENCHMARK_DEFINE_F(TableFixture, find)(benchmark::State& aState) {
   aState.SetComplexityN(aState.range(0));
 }
 
-BENCHMARK_DEFINE_F(TableFixture, congruence)(benchmark::State& aState) {
-  TableFixture::Setup(aState);
-  auto testTable = TableFixture::getTestTable();
-
-  // Test as many lookups specified by the range
-  for (auto _ : aState) {
-    for (int i = 0; i != OP_COUNT; ++i) {
-      auto result = testTable->congruence(i % 200);
-      benchmark::DoNotOptimize(result);
-    }
-  }
-
-  TableFixture::TearDown(aState);
-  aState.SetComplexityN(aState.range(0));
-}
-
 BENCHMARK_DEFINE_F(TableFixture, insert)(benchmark::State& aState) {
   TableFixture::Setup(aState);
   auto testTable = TableFixture::getTestTable();
@@ -85,12 +69,6 @@ BENCHMARK_DEFINE_F(TableFixture, insert)(benchmark::State& aState) {
 }
 
 BENCHMARK_REGISTER_F(TableFixture, find)
-    ->RangeMultiplier(10)
-    ->Range(1e3, 1e6)
-    ->Unit(benchmark::kMillisecond)
-    ->Complexity();
-
-BENCHMARK_REGISTER_F(TableFixture, congruence)
     ->RangeMultiplier(10)
     ->Range(1e3, 1e6)
     ->Unit(benchmark::kMillisecond)

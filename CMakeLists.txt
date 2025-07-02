@@ -4,6 +4,9 @@ project(mw_perf)
 find_package(Threads REQUIRED)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
+# Find Intel TBB
+find_package(TBB REQUIRED)
+
 # Find Boost libraries
 find_package(Boost REQUIRED)
 if(Boost_FOUND)

@@ -1,0 +1,16 @@
+Implementation,Dataset_Size,Time_ms,Complexity,Speedup_vs_Naive,Rank
+congruence_fast,1000,4.84,O(1),1.95x,1
+congruence_fast,10000,4.90,O(1),59.6x,1
+congruence_fast,100000,5.07,O(1),747x,1
+congruence_uniquify_naive,1000,4.72,O(1),2.0x,2
+congruence_uniquify_naive,10000,4.78,O(1),61.1x,2
+congruence_uniquify_naive,100000,5.48,O(1),690x,2
+congruence_parallel_lookup,1000,2.80,O(N log N),3.4x,3
+congruence_parallel_lookup,10000,47.9,O(N log N),6.1x,3
+congruence_parallel_lookup,100000,713,O(N log N),5.3x,3
+congruence_naive,1000,9.42,O(N log N),1.0x,4
+congruence_naive,10000,292,O(N log N),1.0x,4
+congruence_naive,100000,3784,O(N log N),1.0x,4
+congruence_parallel_results_only,1000,638,O(N),0.015x,5
+congruence_parallel_results_only,10000,6811,O(N),0.043x,5
+congruence_parallel_results_only,100000,64695,O(N),0.058x,5

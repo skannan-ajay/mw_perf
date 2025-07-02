@@ -1,0 +1,40 @@
+VNTable Congruence Benchmark Results
+Generated: 2025-07-02T23:51:24+05:30
+System: macOS (8 X 24 MHz CPUs)
+CPU Caches: L1 Data 64 KiB, L1 Instruction 128 KiB, L2 Unified 4096 KiB (x8)
+Load Average: 2.50, 2.44, 1.80
+
+-----------------------------------------------------------------------------------------------
+Benchmark                                                     Time             CPU   Iterations
+-----------------------------------------------------------------------------------------------
+TableFixture/congruence_naive/1000                         9.42 ms         9.42 ms           74
+TableFixture/congruence_naive/10000                         292 ms          292 ms            2
+TableFixture/congruence_naive/100000                       3784 ms         3783 ms            1
+TableFixture/congruence_naive_BigO                      2277.41 NlgN    2277.35 NlgN 
+TableFixture/congruence_naive_RMS                             1 %             1 %    
+TableFixture/congruence_uniquify_naive/1000                4.72 ms         4.72 ms          148
+TableFixture/congruence_uniquify_naive/10000               4.78 ms         4.78 ms          147
+TableFixture/congruence_uniquify_naive/100000              5.48 ms         5.48 ms          128
+TableFixture/congruence_uniquify_naive_BigO          4990497.44 (1)  4990439.32 (1)  
+TableFixture/congruence_uniquify_naive_RMS                    7 %             7 %    
+TableFixture/congruence_parallel_results_only/1000          638 ms          636 ms            1
+TableFixture/congruence_parallel_results_only/10000        6811 ms         6787 ms            1
+TableFixture/congruence_parallel_results_only/100000      64695 ms        64446 ms            1
+TableFixture/congruence_parallel_results_only_BigO    647291.37 N     644796.26 N    
+TableFixture/congruence_parallel_results_only_RMS             1 %             1 %    
+TableFixture/congruence_fast/1000                          4.84 ms         4.84 ms          145
+TableFixture/congruence_fast/10000                         4.90 ms         4.90 ms          143
+TableFixture/congruence_fast/100000                        5.07 ms         5.07 ms          138
+TableFixture/congruence_fast_BigO                    4937957.09 (1)  4937149.85 (1)  
+TableFixture/congruence_fast_RMS                              2 %             2 %    
+TableFixture/congruence_parallel_lookup/1000               2.80 ms         2.78 ms          257
+TableFixture/congruence_parallel_lookup/10000              47.9 ms         47.1 ms           15
+TableFixture/congruence_parallel_lookup/100000              713 ms          705 ms            1
+TableFixture/congruence_parallel_lookup_BigO             428.76 NlgN     424.15 NlgN 
+TableFixture/congruence_parallel_lookup_RMS                   2 %             2 %    
+
+Notes:
+- BigO notation: (1) indicates constant time O(1), N indicates linear O(N), NlgN indicates O(N log N)
+- RMS indicates the root mean square of relative error in the complexity fitting
+- Time and CPU columns show wall-clock and CPU time respectively
+- Iterations column shows how many times each benchmark was run for statistical accuracy
