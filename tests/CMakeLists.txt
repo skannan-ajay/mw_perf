@@ -19,14 +19,18 @@ add_executable(hello_test hello_test.cpp)
 add_executable(hello_bench hello_bench.cpp)
 add_executable(tLinearComplexityExample tLinearComplexityExample.cpp)
 add_executable(tLogarithmicComplexityExample tLogarithmicComplexityExample.cpp)
-
+add_executable(tVNTable tVNTable.cpp)
+add_executable(tStdMap tStdMap.cpp)
+add_executable(tStdMultiMap tStdMultiMap.cpp)
 
 # Add libraries to link against
-target_link_libraries(hello_test GTest::gtest_main)
-target_link_libraries(hello_bench GTest::gtest_main benchmark::benchmark)
-target_link_libraries(tLinearComplexityExample GTest::gtest_main benchmark::benchmark)
-target_link_libraries(tLogarithmicComplexityExample GTest::gtest_main benchmark::benchmark)
-
+target_link_libraries(hello_test GTest::gtest_main ${Boost_LIBRARIES})
+target_link_libraries(hello_bench GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tLinearComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tLogarithmicComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tVNTable GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tStdMap GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
+target_link_libraries(tStdMultiMap GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
 
 include(GoogleTest)
 
