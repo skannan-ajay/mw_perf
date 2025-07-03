@@ -17,7 +17,7 @@ using LlvmVNTable = VNTable<llvm::Value*>;
 using namespace llvm;
 
 // Global variable to store IR file path from command line
-static std::string g_irFilePath = "../synthetic_heavy_gvn.ll";
+static std::string g_irFilePath = "./benchmarks/synthetic_heavy_gvn.ll";
 
 class SyntheticIRFixture : public ::benchmark::Fixture {
 protected:
