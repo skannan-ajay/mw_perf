@@ -26,6 +26,7 @@ add_executable(tVNTableCongruence tVNTableCongruence.cpp)
 
 # Add libraries to link against
 target_link_libraries(hello_test GTest::gtest_main ${Boost_LIBRARIES})
+target_link_libraries(hello_bench benchmark::benchmark ${Boost_LIBRARIES})
 target_link_libraries(tVNTableCongruence GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES} TBB::tbb)
 target_link_libraries(tLinearComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
 target_link_libraries(tLogarithmicComplexityExample GTest::gtest_main benchmark::benchmark ${Boost_LIBRARIES})
